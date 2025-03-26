@@ -74,6 +74,7 @@ boxes.forEach((box)=>{
     }
 //Creating function to check winners
 const checkWinner = ()=>{
+    let isDraw = true;
     for(let pattern of winPatterns){ //here pattern is 1D Array which contail all 3 winning position
        let pos1val=boxes[pattern[0]].innerText; //storing the value of X Or Y on the basis of pattern
        let pos2val=boxes[pattern[1]].innerText;
@@ -86,6 +87,17 @@ const checkWinner = ()=>{
             }
         }
     }
+    boxes.forEach((box) => {
+        if (box.innerText === "") {
+            isDraw = false; // If any box is empty, it's not a draw
+        }
+    });
+    if (isDraw) {
+        msg.innerText = "It's a Draw!"; // Show draw message
+        winningMsg.classList.remove("hide");
+    }
+    
+
 
 }
 newGameButton.addEventListener("click",resetGame);
